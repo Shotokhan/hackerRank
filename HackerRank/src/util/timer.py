@@ -1,0 +1,23 @@
+import time
+
+
+def timer_func(func):
+    """
+    A timer decorator
+    """
+
+    def function_timer(*args, **kwargs):
+        """
+        A nested function for timing other functions
+        """
+        start = time.time()
+        value = func(*args, **kwargs)
+        end = time.time()
+        runtime = end - start
+
+        if runtime > 1 / 50000:
+            msg = "The runtime for {func} took {time} seconds to complete"
+            print(msg.format(func=func.__name__, time=runtime))
+        return value
+
+    return function_timer
